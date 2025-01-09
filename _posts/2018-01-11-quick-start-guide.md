@@ -29,20 +29,33 @@ VIRTUAL MACHINE SETUP
 - Download and install an Ubuntu Desktop VM, An ubuntu server (Acting as the gateway router) and an Application server (Wordpress server used in this case).
 
 VIRTUAL MACHINE CONFIGURATION
-- Enable a single network interface on the ubuntu desktop and configure it with a static ip address. Set up the DNS IP address as 1.1.1.1 and 8.8.8.8.
+- Enable a single network interface on the ubuntu desktop and configure it with a static ip address and attach it to the 192.168.8.1 (enp0s8) surface of the gateway router. Set up the DNS IP address as 1.1.1.1 and 8.8.8.8.
 - Enable three interfaces on the Ubuntu Gateway router (enp0s3, enp0s8, enp0s9 in this case). 
-- Configure the 
+- Configure the the first two with a static ip and the third one as nat to allow internet access.
+    - use this for the configuration ***sudo nano /etc/netplan/00-installer-config.yaml***
+- Enable IP forwarding and create a routing table to allow routing of traffic between the gateway router interfaces
+    
+    -Use this to achieve it
+    - sudo iptables -A FORWARD -i enp0s8 -o enp0s9 -j ACCEPT
+    - sudo iptables -A FORWARD -i enp0s9 -o enp0s8 -j ACCEPT
+    - sudo iptables -A FORWARD -i enp0s3 -o enp0s8 -j ACCEPT
+    - sudo iptables -A FORWARD -i enp0s8 -o enp0s3 -j ACCEPT
+    - sudo iptables -A FORWARD -i enp0s3 -o enp0s9 -j ACCEPT
+    - sudo iptables -A FORWARD -i enp0s9 -o enp0s3 -j ACCEPT
+    - sudo iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 
-"When You Don't Have a Memory, How Can You Remember Who to Trust?"
+    SAVE THE SETTINGS WITH
+    - sudo apt install iptables-persistent
+    - sudo netfilter-persistent save
+    - sudo netfilter-persistent reload
 
-The mind-warping film opened with a hospital patient Simon Cable (Ryan Phillippe) awakening in a <span class="spoiler"> hospital with little knowledge (amnesia perhaps?) of what had happened, and why he was there, etc. He was told by attending Dr. Jeremy Newman (Stephen Rea) that it was July 29, 2002 (Simon thought it was the year 2000 - he was confused - he heard a doctor say 20:00 hours!) and that he had died for two minutes from cardiac arrest following the near-fatal accident -- but he had been revived ("You're as good as new").</span> Dr. Newman: "Simon, this is the 29th of July. The year is 2002. And your wife, whose name is Anna, is waiting outside." 
+-configure the application server with a static ip address and attach it to the 192.168.108.1 (enp0s9) surface of the gateway router
 
-(The doctor left off four crucial additional words, revealed in the film's ending.) (Spoiler: Simon had died and was not resuscitated!).
+TEST CONNECTIVITY
+- ping the application server from the ubuntu desktop
+- ping the ubuntu desktop from the application server
+- access the internet fom the ubuntu desktop.
 
-A major clue to everything that truly happened was the scene that played next under the credits - hospital staff failed to bring a patient back to life with a defibrillator after a car accident. Chest compressions failed and there was no pulse. A second major clue was provided by hospital orderly Travis (Stephen Graham): <span class="spoiler">Everybody dies. No mystery there. But why and how everyone dies. Now, there's a mystery worth solving. Probably the biggest mystery there is.</span>
-
-#### So how do we do spoilers?
-
-```html
-<span class="spoiler">My hidden paragraph here.</span>
-```
+PROBLEM AND SOLUTION
+Unable to access the internet.
+This was solved by varifying the 
