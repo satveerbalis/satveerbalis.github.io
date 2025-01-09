@@ -3,7 +3,7 @@ layout: post
 title:  "A SANDBOX NETWORK"
 author: sal
 categories: [ Jekyll, tutorial ]
-image: assets/images/12.jpg
+image: assets/images/networking.jpg
 featured: true
 hidden: true
 ---
@@ -45,7 +45,7 @@ VIRTUAL MACHINE CONFIGURATION
     - sudo iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 
     SAVE THE SETTINGS WITH
-    
+
     - sudo apt install iptables-persistent
     - sudo netfilter-persistent save
     - sudo netfilter-persistent reload
