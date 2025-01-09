@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "A SANDBOX NETWORK"
-author: sal
+author: Satveer
 categories: [ Jekyll, tutorial ]
 image: assets/images/networking.jpg
 featured: true
