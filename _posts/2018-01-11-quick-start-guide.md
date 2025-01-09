@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "A SANDBOX NETWORK"
-author: sal
+author: Satveer
 categories: [ Jekyll, tutorial ]
-image: assets/images/12.jpg
+image: assets/images/networking.jpg
 featured: true
 hidden: true
 ---
@@ -15,7 +15,7 @@ REQUIREMENTS
 - A gateway router
 - An ubuntu desktop vm
 
-AIM
+**AIM**
 
 To have a network that permits the following 
 - Communication between the ubuntu desktop and the gateway router on subnet 1
@@ -23,7 +23,7 @@ To have a network that permits the following
 - Routing of traffic between the interfaces of the gateway router
 - Internet access through the NAT interface of the gateway router.
 
-PROCEDURE 
+**PROCEDURE** 
 
 VIRTUAL MACHINE SETUP
 - Download and install an Ubuntu Desktop VM, An ubuntu server (Acting as the gateway router) and an Application server (Wordpress server used in this case).
@@ -45,17 +45,20 @@ VIRTUAL MACHINE CONFIGURATION
     - sudo iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 
     SAVE THE SETTINGS WITH
+
     - sudo apt install iptables-persistent
     - sudo netfilter-persistent save
     - sudo netfilter-persistent reload
 
 -configure the application server with a static ip address and attach it to the 192.168.108.1 (enp0s9) surface of the gateway router
 
-TEST CONNECTIVITY
+**TEST CONNECTIVITY**
+
 - ping the application server from the ubuntu desktop
 - ping the ubuntu desktop from the application server
 - access the internet fom the ubuntu desktop.
 
-PROBLEM AND SOLUTION
+**PROBLEM AND SOLUTION**
+
 Unable to access the internet.
 This was solved by varifying the 
