@@ -1,16 +1,37 @@
 ---
 layout: post
-title:  "Let's test spoilers"
+title:  "A SANDBOX NETWORK"
 author: sal
 categories: [ Jekyll, tutorial ]
 image: assets/images/12.jpg
 featured: true
 hidden: true
 ---
+**CREATING A SANDBOX NETWORK**
 
-Director Roland Suso Richter's enigmatic psychological thriller (direct to video/DVD) was based upon screenwriter Michael Cooney's own play "Point of Death" - a title that gave away the film's entire plot twist premise.
+REQUIREMENTS 
 
-As in many similar films, such as Jacob's Ladder (1990), Soul Survivors (2001), and The Butterfly Effect (2004), events and people were thoroughly distorted and confused because the protagonist was at the point of death. The tagline was misleading:
+- An Application Server
+- A gateway router
+- An ubuntu desktop vm
+
+AIM
+
+To have a network that permits the following 
+- Communication between the ubuntu desktop and the gateway router on subnet 1
+- Communication between the Application server and the gateway router on subnet 2
+- Routing of traffic between the interfaces of the gateway router
+- Internet access through the NAT interface of the gateway router.
+
+PROCEDURE 
+
+VIRTUAL MACHINE SETUP
+- Download and install an Ubuntu Desktop VM, An ubuntu server (Acting as the gateway router) and an Application server (Wordpress server used in this case).
+
+VIRTUAL MACHINE CONFIGURATION
+- Enable a single network interface on the ubuntu desktop and configure it with a static ip address. Set up the DNS IP address as 1.1.1.1 and 8.8.8.8.
+- Enable three interfaces on the Ubuntu Gateway router (enp0s3, enp0s8, enp0s9 in this case). 
+- Configure the 
 
 "When You Don't Have a Memory, How Can You Remember Who to Trust?"
 
